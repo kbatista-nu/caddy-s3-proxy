@@ -405,11 +405,11 @@ func (p S3Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request, next caddyhtt
 		w.WriteHeader(caddyErr.StatusCode)
 	}
 	if doS3ErrorPage {
-		if err := p.serveErrorPage(w, strings.Replace(s3Key, "#fullpath", fullPath, 1)); err != nil {
+		if err := p.serveErrorPage(w, strings.ReplaceAll(s3Key, "fullpath", fullPath)); err != nil {
 			// Just log the error as we don't want to swallow the parent error.
 			p.log.Error("error serving error page",
 				zap.String("bucket", p.Bucket),
-				zap.String("key", s3Key),
+				zap.String("key", strings.ReplaceAll(s3Key, "fullpath", fullPath)),
 				zap.String("err", err.Error()),
 			)
 		}
