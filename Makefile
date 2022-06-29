@@ -13,7 +13,7 @@ build: caddy
 
 caddy: *.go go.mod Makefile
 	# go get -u github.com/caddyserver/xcaddy/cmd/xcaddy  -- install xcaddy if you don't have it
-	xcaddy build --output caddy --with github.com/lindenlab/caddy-s3-proxy=${CURDIR}
+	xcaddy build --output caddy --with github.com/kbatista-nu/caddy-s3-proxy=${CURDIR}
 
 .PHONY: docker
 docker: caddy  ## build a docker image for caddy with the s3proxy
